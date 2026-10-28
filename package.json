@@ -1,0 +1,27 @@
+{
+  "name": "nursing-lab-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "간호학 연구·수업 자료 게시 사이트 (MVP 1단계: 정적 사이트)",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.18.5",
+    "remark-gfm": "^4.0.1",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.5"
+  }
+}
