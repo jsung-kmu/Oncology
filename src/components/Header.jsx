@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import site from '../config/site.js';
+import LoginButton from './LoginButton.jsx';
 
 const menu = [
   { to: '/', label: '홈', end: true },
@@ -27,18 +28,7 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-        {/* 다음 단계(Firebase)에서 Google 로그인 버튼으로 교체합니다. */}
-        <button
-          type="button"
-          className="login-button"
-          disabled
-          aria-describedby="login-status"
-        >
-          로그인
-          <span id="login-status" className="badge">
-            준비 중
-          </span>
-        </button>
+        <LoginButton />
       </div>
     </header>
   );

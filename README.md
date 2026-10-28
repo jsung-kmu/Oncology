@@ -116,10 +116,31 @@
 
 > 새로고침해도 404가 나지 않도록 `netlify.toml`에 SPA 리다이렉트(`/* → /index.html 200`)가 설정되어 있습니다.
 
-## 9. 다음 단계(Firebase 연동) 준비 사항
+## 9. Google 로그인 (Firebase Authentication)
 
-- **Firebase 설정 파일 위치:** `src/lib/firebase.js` (다음 단계에서 새로 만듭니다)
-- **설정값(API 키 등):** `.env.example`을 복사해 `.env.local`에 적고, Netlify에는 **Site configuration → Environment variables** 에 입력합니다. `.env.local`은 GitHub에 올라가지 않습니다.
-- **토론 영역:** `src/components/Discussion.jsx` 의 내용만 실제 토론 기능으로 교체합니다.
-- **로그인 버튼:** `src/components/Header.jsx` 의 비활성 "로그인" 버튼을 교체합니다.
-- **배포 주소**(`https://○○.netlify.app`)를 Firebase의 "승인된 도메인(Authorized domains)"에 등록해야 하므로 메모해 두세요.
+로그인 코드는 들어 있지만, **Firebase 설정값을 넣기 전까지 로그인 버튼은 "준비 중"으로 비활성 상태**이고 사이트의 나머지는 그대로 동작합니다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `src/lib/firebase.js` | Firebase 연결 (설정값은 환경 변수에서 읽음) |
+| `src/lib/auth.js` | Google 팝업 로그인·로그아웃, 오류 안내 문구 |
+| `src/lib/useAuth.js` | 현재 로그인한 사용자 확인 |
+| `src/components/LoginButton.jsx` | 상단 메뉴의 로그인 버튼 |
+
+**로그인 방식:** 팝업(`signInWithPopup`)만 사용하며, **사용자가 버튼을 클릭했을 때만** 팝업을 엽니다.
+- 팝업이 차단되면 → "브라우저 주소창 오른쪽의 팝업 차단 아이콘을 눌러 이 사이트의 팝업을 허용해 주세요" 안내
+- 사용자가 팝업을 닫으면 → 안내 없이 조용히 원래 상태로 돌아감
+
+### 설정 방법
+1. [Firebase 콘솔](https://console.firebase.google.com/)에서 프로젝트를 만들고 **웹 앱**을 추가합니다.
+2. **Authentication → 로그인 방법(Sign-in method)** 에서 **Google** 을 사용 설정합니다.
+3. **Authentication → 설정 → 승인된 도메인(Authorized domains)** 에 Netlify 주소(`○○.netlify.app`)를 추가합니다. (`localhost`는 기본 등록됨)
+4. `.env.example` 을 복사해 `.env.local` 로 이름을 바꾸고, Firebase 웹 앱 설정값을 붙여 넣습니다.
+5. Netlify **Site configuration → Environment variables** 에 같은 이름(`VITE_FIREBASE_...`) 4개를 입력하고 다시 배포(**Deploys → Trigger deploy**)합니다.
+
+> Firebase 웹 설정값(apiKey 등)은 원래 브라우저에 공개되는 값이라 비밀번호는 아닙니다. 그래도 저장소에는 올리지 않고, 실제 보호는 승인된 도메인과 (다음 단계의) 보안 규칙으로 합니다.
+
+## 10. 다음 단계에서 할 일
+
+- **승인된 대학원생만 허용:** 로그인한 사람 중 승인 명단에 있는 사람만 토론에 참여하도록 합니다. 지금은 Google 계정이 있으면 누구나 로그인됩니다.
+- **토론 영역:** `src/components/Discussion.jsx` 의 내용을 실제 토론 기능으로 교체합니다.

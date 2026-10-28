@@ -607,3 +607,35 @@ main.container {
     width: 6rem;
   }
 }
+
+/* ---------- 로그인 ---------- */
+.login-area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login-button:not(:disabled) {
+  cursor: pointer;
+}
+
+.login-button:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.login-user {
+  font-size: 0.9rem;
+}
+
+.login-message {
+  flex-basis: 100%;
+  max-width: 22rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: #fff8e1;
+  border-radius: var(--radius);
+}
